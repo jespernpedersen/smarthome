@@ -1,5 +1,4 @@
 #include <ESP8266WiFi.h
-#include <FirebaseArduino.h
 
 const int led = 5;
 const int button = 16;
