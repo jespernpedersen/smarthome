@@ -29,7 +29,7 @@ void setup() {
   Serial.print("IP Address is : ");
   Serial.println(WiFi.localIP());                                                      //print local IP address
   Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);                                       // connect to firebase
-  Firebase.setString("devices/master/led_status", "FALSE");                                          //send initial string of led status
+  Firebase.setString("devices/prime/led_status", "FALSE");                                          //send initial string of led status
 }
 
 void loop() {
@@ -37,7 +37,7 @@ void loop() {
   temp = digitalRead(button);
   // Actions
   if(WiFi.status() == WL_CONNECTED) {
-    fireStatus = Firebase.getString("devices/master/led_status");
+    fireStatus = Firebase.getString("devices/prime/led_status");
     if (fireStatus == "TRUE") {                                                          // compare the input of led status received from firebase
       // Serial.println("Led Turned ON");                         
       digitalWrite(LED_BUILTIN, LOW);                                        //send initial string of led status
@@ -53,10 +53,10 @@ void loop() {
     }
     // Button Override
     if (temp == HIGH) {
-        Firebase.setString("devices/master/interactive", "TRUE");    
+        Firebase.setString("devices/prime/interactive", "TRUE");    
     }
     else {
-        Firebase.setString("devices/master/interactive", "FALSE");
+        Firebase.setString("devices/prime/interactive", "FALSE");
     }
   }
   else {
