@@ -39,7 +39,7 @@ void setup() {
 
 void loop() {
   // Actions
-  if(WiFi.status() == WL_CONNECTED) {
+  // if(WiFi.status() == WL_CONNECTED) {
     int pulseWidth = 0;
 
     digitalWrite(sensorTrigPin, HIGH);
@@ -50,15 +50,14 @@ void loop() {
 
     // Firebase.setInt("devices/theta/distance", pulseWidth);
 
-    if(pulseWidth < 3) {
+    if(pulseWidth > 3) {
       entryLevel++;
-      Firebase.setInt("devices/theta/distance", entryLevel);
+      Firebase.setInt("devices/theta/entryamount", entryLevel);
     }
+
     
-      Serial.println(pulseWidth);
+      Firebase.setInt("devices/theta/distance", pulseWidth);
+    
+    Serial.println(pulseWidth);
     delay(1000);
-  }
-  else {
-      Serial.println("Could not connect to internet");    
-  }
 }
